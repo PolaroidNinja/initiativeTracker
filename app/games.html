@@ -6,7 +6,15 @@
 			<input name="title" placeholder="Title" ng-model="newGame.title"></input>
 			<div class='form-group'>
 				<label>
-					<input type="checkbox" name="public" ng-model="newGame.isPublic"></input> Public?
+					Public?
+					<input type="checkbox" name="public" ng-model="newGame.isPublic"></input>
+				</label>
+			</div>
+			<div class='form-group'>
+				<label>
+					System: 
+					<select ng-model="newGame.system" ng-options="value for (key, value) in firebase.systems">
+					</select>
 				</label>
 			</div>
 			<button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> Add Game</button>

@@ -14,9 +14,11 @@ angular.module('app').controller('games', ['$scope', '$location', '$firebase' ,f
 		}else {
 			this.showAddForm = false;
 			this.newGame.user = this.auth.user.id;
-			var token = this.auth.user.md5_hash + this.newGame.title;
-			this.firebase.$child('games').$add(this.newGame);
-			console.log('here');
+			var gameRef = this.firebase.$child('games');
+			gameRef.$add(this.newGame,function(){
+				$scope.alert.class = "success";
+				$scope.alert.message = "Game Created Successfully!";
+			});
 		}
 	}
 
