@@ -13,7 +13,10 @@ angular.module('app').controller('games', ['$scope', '$location', '$firebase' ,f
 			this.showAddForm = true;
 		}else {
 			this.showAddForm = false;
-			alert('add game');
+			this.newGame.user = this.auth.user.id;
+			var token = this.auth.user.md5_hash + this.newGame.title;
+			this.firebase.$child('games').$add(this.newGame);
+			console.log('here');
 		}
 	}
 
