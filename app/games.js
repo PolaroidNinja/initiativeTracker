@@ -9,23 +9,24 @@ angular.module('app').controller('games', ['$scope', '$location', '$firebase' ,f
 	var ref = new Firebase('https://initative.firebaseio.com/');
 	$scope.firebase = $firebase(ref);
 
-	$scope.list = {
-		numenera: "Numenera",
-		dresden: "Dresden",
-		foo:"Foo"
-	};
-
 	$scope.addGame = function() {
+		var gameRef,
+			newGameRef,
+			newGameName;
+
+
 		if(!this.showAddForm) {
 			this.showAddForm = true;
 		}else {
 			this.showAddForm = false;
 			this.newGame.user = this.auth.user.id;
-			var gameRef = this.firebase.$child('games');
-			gameRef.$add(this.newGame,function(){
+			gameRef = this.firebase.$child('games');
+			newGameRef = gameRef.$add(this.newGame,function(){
 				$scope.alert.class = "success";
 				$scope.alert.message = "Game Created Successfully!";
 			});
+			newGameName = newGameRef.name();
+			newGameRef.update({'gid':newGameName});
 		}
 	}
 
