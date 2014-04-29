@@ -1,5 +1,8 @@
 <div class="container">
 	<h1>My Games</h1>
+	<ul>
+		<li ng-repeat="game in firebase.games | orderByPriority | filter:{ user: auth.user.id}">{{game.title}}</li>
+	</ul>
 	<form ng-submit="addGame()" role="form" class="form-inline">
 		<fieldset ng-show="showAddForm" class="form-group">
 			<legend>Create New Game</legend>

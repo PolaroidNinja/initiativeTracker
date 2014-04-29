@@ -3,10 +3,17 @@ angular.module('app').controller('games', ['$scope', '$location', '$firebase' ,f
 		$location.path('/');
 		$scope.alert.class = "danger";
 		$scope.alert.message = "Please sign in to view your games";
+		return false;
 	}
 
 	var ref = new Firebase('https://initative.firebaseio.com/');
 	$scope.firebase = $firebase(ref);
+
+	$scope.list = {
+		numenera: "Numenera",
+		dresden: "Dresden",
+		foo:"Foo"
+	};
 
 	$scope.addGame = function() {
 		if(!this.showAddForm) {
