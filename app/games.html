@@ -1,7 +1,7 @@
 <div class="container">
 	<h1>My Games</h1>
 	<ul>
-		<li ng-repeat="game in firebase.games | orderByPriority | filter:{ user: auth.user.id}"><<a href="/#/play/{{game.gid}}">{{game.title}} - {{game.system}}</a></li>
+		<li ng-repeat="game in firebase.games | orderByPriority | filter:{ user: auth.user.id}"><a href="/#/play/{{game.gid}}">{{game.title}} - {{game.system}}</a></li>
 	</ul>
 	<form ng-submit="addGame()" role="form" class="form-inline">
 		<fieldset ng-show="showAddForm" class="form-group">
