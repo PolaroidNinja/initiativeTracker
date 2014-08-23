@@ -2,10 +2,10 @@
 
 <table>
 	<tr>
-		<th>Participant</th>
-		<th ng-click="changeSort()">Initiative <span class="glyphicon glyphicon-circle-arrow-{{orderType.icon}}"></span></th>
+		<th ng-click="reverse=!reverse;order('name', reverse)">Participant</th>
+		<th ng-click="reverse=!reverse;order('initiative', reverse)">Initiative <span class="glyphicon glyphicon-circle-arrow-{{gliphicondir}}"></span></th>
 	</tr>
-	<tr ng-repeat="participant in firebase.participants | orderObjectBy:orderType.sort">
+	<tr ng-repeat="participant in participantsArray">
 		<td>{{participant.name}}</td>
 		<td>{{participant.initiative}}</td>
 	</tr>

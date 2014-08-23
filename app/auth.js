@@ -1,7 +1,7 @@
 app.controller('AuthCtrl', [
-  '$scope', '$rootScope', '$firebaseAuth', '$location', function($scope, $rootScope, $firebaseAuth, $location) {
+  '$scope', '$rootScope', '$firebaseSimpleLogin', '$location', function($scope, $rootScope, $firebaseSimpleLogin, $location) {
     var ref = new Firebase('https://initative.firebaseio.com/');
-    $rootScope.auth = $firebaseAuth(ref);
+    $rootScope.auth = $firebaseSimpleLogin(ref);
     
     $scope.signIn = function () {
       $rootScope.auth.$login('password', {

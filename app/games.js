@@ -6,8 +6,9 @@ angular.module('app').controller('games', ['$scope', '$location', '$firebase' ,f
 		return false;
 	}
 
-	var ref = new Firebase('https://initative.firebaseio.com/');
-	$scope.firebase = $firebase(ref);
+	var ref = new Firebase('https://initative.firebaseio.com/games');
+	var sync = $firebase(ref);
+	$scope.gamesArray = sync.$asArray();
 
 	$scope.addGame = function() {
 		var gameRef,
