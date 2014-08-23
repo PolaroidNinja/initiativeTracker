@@ -1,14 +1,15 @@
-angular.module('app').controller('play', ['$scope', '$location', '$routeParams', '$firebase', '$filter' ,function($scope, $location, $routeParams, $firebase, $filter){
-	$scope.gameID = $routeParams.gameID;
-
-	var ref = new Firebase('https://initative.firebaseio.com/games/' + $scope.gameID + '/participants');
-	var sync = $firebase(ref);
+angular.module('app').controller('play', ['$scope', '$location', '$routeParams', '$firebase', '$filter' , 'game'
+	,function($scope, $location, $routeParams, $firebase, $filter, $game){
+	var gameID = $routeParams.gameID;
 	var orderBy = $filter('orderBy');
+	var participants = $game.setId(gameID).participants.get().$asObject();
+	var displayArray = $game.participants.get().$asArray();
 
-	var participants = sync.$asArray();
-	participants.$loaded().then(function(){
-		console.log(participants);
-		order( 'initiative' , false);
+	displayArray.$loaded().then(function(){
+		order( 'initiative' , true);
+		$game.participants.getByName('Leo').then(function(e){
+			console.log(e);
+		});
 	});
 
 	$scope.addParticipant = function() {
@@ -19,13 +20,13 @@ angular.module('app').controller('play', ['$scope', '$location', '$routeParams',
 		if(!this.showAddForm) {
 			this.showAddForm = true;
 		}else {
-			ref.child('participants').push(newParticipant);
+			$game.participants.add(newParticipant);
 			this.showAddForm = false;
 		}
 	}
 
 	var order = function(predicate, reverse){
-		var pa = orderBy(participants, predicate, reverse);
+		var pa = orderBy(displayArray, predicate, reverse);
 		$scope.participantsArray = pa;
 	}
 
