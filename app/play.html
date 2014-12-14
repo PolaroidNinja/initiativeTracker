@@ -1,15 +1,12 @@
 <h1>{{firebase.title}}</h1>
 
-<table>
-	<tr>
-		<th ng-click="reverse=!reverse;order('name', reverse)">Participant</th>
-		<th ng-click="reverse=!reverse;order('initiative', reverse)">Initiative <span class="glyphicon glyphicon-circle-arrow-{{gliphicondir}}"></span></th>
-	</tr>
-	<tr ng-repeat="participant in participantsArray">
-		<td>{{participant.name}}</td>
-		<td>{{participant.initiative}}</td>
-	</tr>
-</table>
+<div class="row">
+	<div ng-click="reverse=!reverse;order('name', reverse)" class="col-md-1">Participant</div>
+	<div ng-click="reverse=!reverse;order('initiative', reverse)" class="col-md-1">Initiative <span class="glyphicon glyphicon-circle-arrow-{{gliphicondir}}"></span></div>
+</div>
+<div sv-root sv-part="participantsArray" sv-on-sort="sorted($item, $partFrom, $partTo, $indexFrom, $indexTo)">
+	<div participant-renderer ng-repeat="participant in participantsArray"/>
+</div>
 
 <form ng-submit="addParticipant()" role="form" class="form-inline">
 		<fieldset ng-show="showAddForm" class="form-group">
